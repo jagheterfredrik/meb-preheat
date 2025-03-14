@@ -3,7 +3,7 @@ Investigating battery preheating on older MEB cars such as the ID.4. This is cur
 
 Lots of general information available from [NHTSA](https://static.nhtsa.gov/odi/tsbs/2021/MC-10186407-0001.pdf).
 
-## The OBD (gateway) method
+## The J533 (gateway) method
 The folks over at OBD11 has figured out a way to heat the battery using a UDS output test through the gateway to the battery module (J840, module 8C). This requires you to heat the battery for 5 minutes while stationary with your hood open. This is cool but not very practical for the purpose of preheating before DC fast charging while travelling. The output test can be re-run but the gateway firewall will lock you out after driving 200km.
 
 ## The Z132 (heater) method
@@ -35,7 +35,7 @@ Open questions:
  - Will the J840 turn on the V590 coolant pump for me?
  - Will the J840 throw an error when the Z132 heater is running without it saying so? (Thermal runaway protection?)
 
-## The EV-CAN (J840) method
+## The J840 (BMS/BMCe) method
 As a third option, I have been looking into if the J840 exposes functionality for turning on preheating by talking directly to it on the EV-CAN bus, this would require a man-in-the-middle harness in the gateway (located behind the glove box).
 
 I got a hold of the EV_BMCeVWBSMEB ODX decription of the unit but can only find the output test used by OBD11. It might works to trigger it directly over the EV-CAN bus without hitting the firewall.
