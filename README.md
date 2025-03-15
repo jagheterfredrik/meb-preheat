@@ -28,6 +28,8 @@ The LIN communication is documented in the thread as "The feedback comes on ID48
 
 The thread goes on to say that the power is a value in percent 0-100 of a maximum of 5kW (although the datasheet mentions a boost mode of 7kW). The thread also "...confirmed the heater self regulates if it gets too hot..."
 
+Some [code](https://github.com/damienmaguire/Stm32-vcu/blob/master/src/VWheater.cpp) is available in the zombieverter project. 
+
 According to the NHTSA document: "The coolant temperature sensors are connected directly to the J840 Battery Regulation Control Module. The control unit uses the sensor information to regulate the V590 High-Voltage Battery Coolant Pump." If this is the case, then hopefully all we have to do is to enable the Z132 PTC heater over LIN and the J840 module would regulate the coolant pump for us. If this is not the case, we would have to also interface with the V590 coolant pump, which is probably controlled using a PWM signal.
 
 Open questions:
