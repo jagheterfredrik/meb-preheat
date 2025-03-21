@@ -24,7 +24,7 @@ Which agrees with the ID.4 wiring diagram, available from e.g. [vwidtalk.com](ht
 
 <img width="391" alt="Screenshot 2025-03-14 at 15 06 33" src="https://github.com/user-attachments/assets/dd0b78ba-e854-4e69-aba7-3779fff136a7" />
 
-The LIN communication is documented in the thread as "The feedback comes on ID48. Byte 0 is power. 13 for 770W, 26 for 1540W. ID28 is sent for control. Byte 0 is power, last bit of byte 1 starts and stops."
+The LIN communication is documented in the thread as "The feedback comes on ID48. Byte 0 is power. 13 for 770W, 26 for 1540W. ID28 is sent for control. Byte 0 is power, last bit of byte 1 starts and stops". The wiki has the information a [bit more cleaned up](https://openinverter.org/wiki/Volkswagen_Heater#LIN_Bus_Communication).
 
 The thread goes on to say that the power is a value in percent 0-100 of a maximum of 5kW (although the datasheet mentions a boost mode of 7kW). The thread also "...confirmed the heater self regulates if it gets too hot..."
 
