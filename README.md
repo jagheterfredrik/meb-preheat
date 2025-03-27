@@ -49,7 +49,6 @@ The J848 heater also implements UDSonLIN and the car issues Read data by identif
 According to the NHTSA document: "The coolant temperature sensors are connected directly to the J840 Battery Regulation Control Module. The control unit uses the sensor information to regulate the V590 High-Voltage Battery Coolant Pump." If this is the case, then hopefully all we have to do is to enable the Z132 PTC heater over LIN and the J840 module would regulate the coolant pump for us. If this is not the case, we would have to also interface with the V590 coolant pump, which is probably controlled using a PWM signal.
 
 Open questions:
- - Is my heater the same as dicsussed in the thread? (It looks visually similar)
  - Will the J840 turn on the V590 coolant pump for me?
  - Will the J840 throw an error when the Z132 heater is running without it saying so? (Thermal runaway protection?)
 
