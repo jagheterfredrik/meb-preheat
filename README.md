@@ -28,6 +28,15 @@ Every 50ms a PID is polled, alternating between:
  - ID 15 (0x0F): 8 bytes, in my case 0, 190, 0, 0, 150, 64, 58, 60. My assumption is that it is feedback and the last three are temperatures -50. During a 15 second listen, only the fifth byte (150) value flip flopped between 150 and 151.
  - ID 28 (0x1C): 4 bytes, in my case 254, 252, 1, 248. I assume this is control but I don't think the heater was heating so not sure. This value remained constant.
 
+The J848 heater also implements UDSonLIN and the car issues Read data by identifier on startup to which the heater responds:
+- F187: "1EE963231  "
+- F189: "0020"
+- F1A3: "H04"
+- F191: "1EE963231  "
+- F18C: "1EE96323121239000693"
+- F17C: "BEO-BEO27.08.2100010693"
+- F197: "J848 HV-PTC  "
+
 According to the NHTSA document: "The coolant temperature sensors are connected directly to the J840 Battery Regulation Control Module. The control unit uses the sensor information to regulate the V590 High-Voltage Battery Coolant Pump." If this is the case, then hopefully all we have to do is to enable the Z132 PTC heater over LIN and the J840 module would regulate the coolant pump for us. If this is not the case, we would have to also interface with the V590 coolant pump, which is probably controlled using a PWM signal.
 
 Open questions:
