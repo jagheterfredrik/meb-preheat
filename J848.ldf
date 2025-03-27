@@ -1,0 +1,101 @@
+
+LIN_description_file;
+LIN_protocol_version = "2.1";
+LIN_language_version = "2.1";
+LIN_speed = 19.2 kbps;
+
+Nodes {
+  Master: BMS, 10 ms, 0.1 ms ;
+  Slaves: PTC ;
+}
+
+Signals {
+
+  HvCurrent: 8, 0, PTC, BMS ;
+  HvConnectorVoltage: 8, 0, PTC, BMS ;
+  Status: 8, 0, PTC, BMS ;
+  LvConnectorVoltage: 8, 0, PTC, BMS ;
+  TempHeater: 8, 0, PTC, BMS ;
+  TempIn: 8, 0, PTC, BMS ;
+  TempOut: 8, 0, PTC, BMS ;
+  Unknown1: 8, 0, BMS, PTC ;
+  Unknown2: 10, 0, BMS, PTC ;
+  Enable: 1, 0, BMS, PTC ;
+  Duty: 7, 0, BMS, PTC ;
+  Unknown3: 6, 0, BMS, PTC ;
+}
+
+Frames {
+  Feedback: 15, PTC, 8 {
+    HvCurrent, 0 ;
+    HvConnectorVoltage, 8 ;
+    Status, 16 ;
+    LvConnectorVoltage, 32 ;
+    TempHeater, 40 ;
+    TempIn, 48 ;
+    TempOut, 56 ;
+  }
+  Control: 28, BMS, 4 {
+    Unknown1, 0 ;
+    Unknown2, 8 ;
+    Enable, 18 ;
+    Duty, 19 ;
+    Unknown3, 26;
+  }
+}
+
+Node_attributes {
+  PTC{
+    LIN_protocol = "2.1" ;
+    configured_NAD = 0x4 ;
+    initial_NAD = 0x4 ;
+    product_id = 0x0, 0x0, 0 ;
+    P2_min = 50 ms ;
+    ST_min = 50 ms ;
+    N_As_timeout = 1000 ms ;
+    N_Cr_timeout = 1000 ms ;
+    configurable_frames {
+      Control ;
+    }
+  }
+}
+
+Schedule_tables {
+ Schedule_Normal {
+    Feedback delay 100 ms ;
+    Control delay 100 ms ;
+  }
+}
+
+
+Signal_encoding_types {
+  HeaterCurrent {
+    physical_value, 0, 52, 0.25, 0, "A" ;
+  }
+  HeaterHighVoltage {
+    physical_value, 0, 255, 2, 0, "V" ;
+  }
+  HeaterLowVoltage {
+    physical_value, 0, 255, 0.1, 0, "V" ;
+  }
+  HeaterTemperature {
+    physical_value, 0, 245, 1, -50, "degC" ;
+  }
+  DutyType {
+    physical_value, 0, 100, 1, 0, "%" ;
+  }
+  EnableBit {
+    physical_value, 0, 1, 1, 0, "bit" ;
+    logical_value, 0, "Off" ;
+    logical_value, 1, "On" ;
+  }
+}
+
+Signal_representation {
+  HeaterCurrent: HvCurrent ;
+  HeaterHighVoltage: HvConnectorVoltage ;
+  HeaterLowVoltage: LvConnectorVoltage ;
+  HeaterTemperature: TempHeater, TempIn, TempOut ;
+  EnableBit: Enable ;
+  DutyType: Duty ;
+}
