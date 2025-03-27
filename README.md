@@ -25,8 +25,17 @@ See the ID.4 wiring diagram, available from e.g. [vwidtalk.com](https://www.vwid
 The LIN communication is documented is different from [older VW/VAG heaters](https://openinverter.org/wiki/Volkswagen_Heater#LIN_Bus_Communication).
 
 Every 50ms a PID is polled, alternating between:
- - ID 15 (0x0F): 8 bytes, in my case 0, 190, 0, 0, 150, 64, 58, 60. My assumption is that it is feedback and the last three are temperatures -50. During a 15 second listen, only the fifth byte (150) value flip flopped between 150 and 151.
- - ID 28 (0x1C): 4 bytes, in my case 254, 252, 1, 248. I assume this is control but I don't think the heater was heating so not sure. This value remained constant.
+ - ID 15 (0x0F) for feedback
+   - Byte 1: Current (0.25*X in amps)
+   - Byte 2: HV battery voltage (2*X in volt)
+   - Byte 3,4: Status? Always 0
+   - Byte 5: LV battery voltage (0.1*X in volt)
+   - Byte 6, 7, 8: Temp heater, in, out. Offset -50
+ - ID 28 (0x1C) for control
+   - Byte 3, bit 6: on/off
+   - Byte 3, bit 0-5 and byte 4 bit 0-1: duty
+
+When turning on the heater, the J840 BMS ramps the duty cycle at a rate 2% / second and stops at 99.
 
 The J848 heater also implements UDSonLIN and the car issues Read data by identifier on startup to which the heater responds:
 - F187: "1EE963231  "
