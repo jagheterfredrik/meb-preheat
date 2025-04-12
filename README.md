@@ -7,7 +7,7 @@ Lots of general information available from [NHTSA](https://static.nhtsa.gov/odi/
 The folks over at OBD11 has figured out a way to heat the battery using a UDS output test through the gateway to the battery module (J840, module 8C). This allows you to heat the battery for 5 minutes but requires your hood to be opened before being accepted. This is cool but not very practical for the purpose of preheating before DC fast charging while travelling. The output test can be re-run but the gateway firewall will lock you out after driving 200km.
 
 ## The Z132 (heater) method
-Current hypothesis is to man-in-the-middle the LIN communication between the J840 and the Z132 heater, turning the heater on.
+My initial hypothesis was to man-in-the-middle the LIN communication between the J840 and the Z132 heater, turning the heater on. This unfortunately does not trigger the BMS to activate the circulation pump, as it is controlled by the temperature reported by G898/G898 sensors on the battery coolant inlet.
 
 Relevant part showing the coolant circuit while heating the battery:
 
@@ -45,12 +45,6 @@ The J848 heater also implements UDSonLIN and the car issues Read data by identif
 - F18C: "1EE96323121239000693"
 - F17C: "BEO-BEO27.08.2100010693"
 - F197: "J848 HV-PTC  "
-
-According to the NHTSA document: "The coolant temperature sensors are connected directly to the J840 Battery Regulation Control Module. The control unit uses the sensor information to regulate the V590 High-Voltage Battery Coolant Pump." If this is the case, then hopefully all we have to do is to enable the Z132 PTC heater over LIN and the J840 module would regulate the coolant pump for us. If this is not the case, we would have to also interface with the V590 coolant pump, which is probably controlled using a PWM signal.
-
-Open questions:
- - Will the J840 turn on the V590 coolant pump for me?
- - Will the J840 throw an error when the Z132 heater is running without it saying so? (Thermal runaway protection?)
 
 ## The J840 (BMS/BMCe) method
 As a third option, I have been looking into if the J840 exposes functionality for turning on preheating by talking directly to it on the EV-CAN bus, this would require a man-in-the-middle harness in the gateway (located behind the glove box).
