@@ -1,7 +1,27 @@
 # meb-preheat
-Investigating battery preheating on older MEB cars such as the ID.4. This is currently a scratchpad for my research and ideas.
+Investigating battery preheating on older MEB cars such as the ID.4. This is currently a scratchpad for my research and ideas. It does look like the J840 method using UDS output test is viable!
 
 Lots of general information available from [NHTSA](https://static.nhtsa.gov/odi/tsbs/2021/MC-10186407-0001.pdf).
+
+## The J840 (BMS/BMCe) method
+I have been looking into if the J840 exposes functionality for turning on preheating by talking directly to it on the EV-CAN bus, this would require a harness between the gateway and the rest of the network (located behind the glove box).
+
+I got hold of the J840 firwmare (FL_0Z1915184J_1041_V001_S.frf). Inside is an ODX container with the AES encrypted firmware but I haven't managed to find the key.
+
+I also got a hold of the EV_BMCeVWBSMEB ODX decription of the unit but could only find the output test used by OBD11 (see below). By bypassing the firewall by connecting after the gateway, the UDS output test can be activated over the CAN-EV bus! The harness was graciously custom made by FICI Electronic Connector store on Aliexpress, they now provide [a product](https://www.aliexpress.com/item/1005008006846323.html) which one can cut to hook into the CAN-EV bus.
+
+ - Pin 11: +12V
+ - Pin 15: CAN-L (of the CAN-EV bus)
+ - Pin 16: CAN-L (of the CAN-EV bus)
+ - Pin 31: GND
+
+The CAN-EV bus is unfortunately named "powertrain CAN bus" in the ID.4 wiring diagram, even though it is a separate bus from the powertrain bus. To make matters even worse, the actual powertrain CAN bus is also named "powertrain CAN bus" (pin 13/14 on the gateway) in the wiring diagram.
+
+![IMG_6314](https://github.com/user-attachments/assets/5db893a3-dfbd-468c-a423-8d09f005f737)
+![IMG_6316](https://github.com/user-attachments/assets/7fa45861-95a9-4cbc-8cf9-8b60646e177c)
+
+Open questions:
+ - Does the J840 have an external EEPROM to dump the firmware from
 
 ## The J533 (gateway) method
 The folks over at OBD11 has figured out a way to heat the battery using a UDS output test through the gateway to the battery module (J840, module 8C). This allows you to heat the battery for 5 minutes but requires your hood to be opened before being accepted. This is cool but not very practical for the purpose of preheating before DC fast charging while travelling. The output test can be re-run but the gateway firewall will lock you out after driving 200km.
@@ -45,14 +65,3 @@ The J848 heater also implements UDSonLIN and the car issues Read data by identif
 - F18C: "1EE96323121239000693"
 - F17C: "BEO-BEO27.08.2100010693"
 - F197: "J848 HV-PTC  "
-
-## The J840 (BMS/BMCe) method
-As a third option, I have been looking into if the J840 exposes functionality for turning on preheating by talking directly to it on the EV-CAN bus, this would require a man-in-the-middle harness in the gateway (located behind the glove box).
-
-I got a hold of the EV_BMCeVWBSMEB ODX decription of the unit but can only find the output test used by OBD11. It might works to trigger it directly over the EV-CAN bus without hitting the firewall.
-I also got hold of the J840 firwmare (FL_0Z1915184J_1041_V001_S.frf). Inside is an ODX container with the AES encrypted firmware but I haven't managed to find the key.
-
-Open questions:
- - Does the J840 have an external EEPROM to dump the firmware from?
- - Can we simply call the output test UDS on the EV-CAN bus?
- - What connector do we need to build the harness?
