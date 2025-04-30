@@ -20,7 +20,7 @@ The CAN-EV bus is unfortunately named "powertrain CAN bus" in the ID.4 wiring di
 ![IMG_6314](https://github.com/user-attachments/assets/5db893a3-dfbd-468c-a423-8d09f005f737)
 ![IMG_6316](https://github.com/user-attachments/assets/7fa45861-95a9-4cbc-8cf9-8b60646e177c)
 
-Triggering the heater from the CAN-EV bus works, it outputs max 5kW but throttles power to keep the heater output at 40C. "Dynamic limit for charging in amepere" stops increasing at battery minimum of 21C, seems to peak at 150kW.
+Triggering the heater from the CAN-EV bus works, it outputs max 5kW but throttles power to keep the heater output at 40C. "Dynamic limit for charging in amepere" stops increasing at battery minimum of 21C, peaks at 149.9kW (for my Wuxi battery). BMS 0% seems to correlate with 307.2V (3.2V / cell), fully charged (BMS 95.6%) is 394.75V (4.12V per cell), indicating a top buffer of 4.4% and max voltage of 4.3V. Rapidgating seems to happen at battery max temp of 40.5C.
 
 At 48% SoC (charing limit in A @ battery min temp C)
  - 382 @ 16.75
