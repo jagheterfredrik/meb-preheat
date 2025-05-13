@@ -22,7 +22,9 @@ The CAN-EV bus is unfortunately named "powertrain CAN bus" in the ID.4 wiring di
 
 Triggering the heater from the CAN-EV bus works, it outputs max 5kW but throttles power to keep the heater output at 42C. "Dynamic limit for charging in amepere" stops increasing at different points, parameters unknown, sometimes at battery minimum of 21C with peak at 149.9kW (for my Wuxi battery). BMS 0% seems to correlate with 307.2V (3.2V / cell), fully charged (BMS 95.6%) is 394.75V (4.12V per cell), indicating a top buffer of 4.4% and max voltage of 4.3V. Rapidgating seems to happen at battery max temp of 40.5C.
 
-My 2022 ID.4 RWD (Wuxi battery) managed to receive 449.52A @ 371.5V (~165kW) when preheated to 25C battery min. SoC BMS was 19.2%, charging started at 12.4%, dynamic limit indicated 448.2A max.
+My 2022 ID.4 RWD (Wuxi battery, manufactured 2021-09, EU, v3.7) managed to receive 449.52A @ 371.5V (~165kW) when preheated to 25C battery min. SoC BMS was 19.2%, charging started at 12.4%, dynamic limit indicated 448.2A max.
+
+It seems a new 82kWh battery was introduced ~Jan 2022 for RWD MEB cars. The cars manufactured prior seem to share the battery and charging curves with the GTX models, [see comparison](https://youtu.be/Z7BFLUTt_bI?t=186).
 
 Open questions:
  - Does the J840 have an external EEPROM to dump the firmware from
