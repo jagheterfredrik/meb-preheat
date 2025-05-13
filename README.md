@@ -26,6 +26,8 @@ My 2022 ID.4 RWD (Wuxi battery, manufactured 2021-09, EU, v3.7) managed to recei
 
 It seems a new 82kWh battery was introduced ~Jan 2022 for RWD MEB cars. The cars manufactured prior seem to share the battery and charging curves with the GTX models, [see comparison](https://youtu.be/Z7BFLUTt_bI?t=186).
 
+It also seems the only way to reach 175kW is to charge when the `battery_min > 30C` but `SoC_bms < 20%`.
+
 Open questions:
  - Does the J840 have an external EEPROM to dump the firmware from
 
