@@ -20,26 +20,9 @@ The CAN-EV bus is unfortunately named "powertrain CAN bus" in the ID.4 wiring di
 ![IMG_6314](https://github.com/user-attachments/assets/5db893a3-dfbd-468c-a423-8d09f005f737)
 ![IMG_6316](https://github.com/user-attachments/assets/7fa45861-95a9-4cbc-8cf9-8b60646e177c)
 
-Triggering the heater from the CAN-EV bus works, it outputs max 5kW but throttles power to keep the heater output at 40C. "Dynamic limit for charging in amepere" stops increasing at battery minimum of 21C, peaks at 149.9kW (for my Wuxi battery). BMS 0% seems to correlate with 307.2V (3.2V / cell), fully charged (BMS 95.6%) is 394.75V (4.12V per cell), indicating a top buffer of 4.4% and max voltage of 4.3V. Rapidgating seems to happen at battery max temp of 40.5C.
+Triggering the heater from the CAN-EV bus works, it outputs max 5kW but throttles power to keep the heater output at 42C. "Dynamic limit for charging in amepere" stops increasing at different points, parameters unknown, sometimes at battery minimum of 21C with peak at 149.9kW (for my Wuxi battery). BMS 0% seems to correlate with 307.2V (3.2V / cell), fully charged (BMS 95.6%) is 394.75V (4.12V per cell), indicating a top buffer of 4.4% and max voltage of 4.3V. Rapidgating seems to happen at battery max temp of 40.5C.
 
-At 48% SoC (charing limit in A @ battery min temp C)
- - 382 @ 16.75
- - 391.4 @ 17.38
- - 397.4 @ 17.88
- - 403.2 @ 18.5
- - 404 @ 18.63
- - 407.4 @ 19
- - 410.8 @ 19.38
- - 413.2 @ 19.63
- - 414.2 @ 19.75
- - 415.8 @ 19.88
- - 417.4 @ 20
- - 418.4 @ 20.13
- - 420 @ 20.25
- - 422.6 @ 20.5
- - 423.4 @ 20.63
- - 424.2 @ 20.75
- - 424.2 @ 20.88
+My 2022 ID.4 RWD managed to receive 448.2A @ 371.5V (~170kW) when preheated to 25C battery min. SoC BMS was 19.2%, charging started at 12.4%.
 
 Open questions:
  - Does the J840 have an external EEPROM to dump the firmware from
