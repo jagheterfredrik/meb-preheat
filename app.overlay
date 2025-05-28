@@ -1,0 +1,16 @@
+/ {
+	chosen {
+		zephyr,console = &cdc_acm_uart0;
+	};
+};
+
+&zephyr_udc0 {
+	cdc_acm_uart0: cdc_acm_uart0 {
+		compatible = "zephyr,cdc-acm-uart";
+	};
+};
+
+&fdcan1 {
+	bitrate = <500000>;
+	bitrate-data = <2000000>;
+};
