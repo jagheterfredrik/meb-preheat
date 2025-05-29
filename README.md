@@ -5,7 +5,7 @@ This repository contains information on how to build a cable harness that can in
 Buy [a cable](https://www.aliexpress.com/item/1005008006846323.html) and a [USB2CANFDv1](https://www.aliexpress.com/item/1005007126451299.html). You will also need a ST-Link V2 (or [a clone](https://www.aliexpress.com/item/33010611392.html)) and a 1.5m USB-C to USB-C cable.
 
 ## Step 2
-Flash the custom firmware on the USB2CANFDv1, start by [completely emptying the flash](https://github.com/WeActStudio/WeActStudio.USB2CANFDV1?tab=readme-ov-file#how-to-completely-empty-flash), then build the code or flash the hex file in the Github releases. Flip the CAN termination switch on the USB2CANFDv1 (marked 120Ω) to OFF.
+Flash the custom firmware on the USB2CANFDv1, start by [completely emptying the flash](https://github.com/WeActStudio/WeActStudio.USB2CANFDV1?tab=readme-ov-file#how-to-completely-empty-flash), then build the code or flash the hex file in the Github releases (I'm using STM32CubeProgrammer, if you're using a clone ST-Link you might have to set "Shared" to "Enabled" and press refresh next to the serial number, then connect, open the hex file, followed by Download). Flip the CAN termination switch on the USB2CANFDv1 (marked 120Ω) to OFF.
 
 ## Step 3
 Cut the following strands of the aliexpress cable and plug them in accordingly on the USB2CANFDv1 screw terminal. There are pin# marking on the connector making them easy to identify.
