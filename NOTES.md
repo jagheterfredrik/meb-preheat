@@ -12,7 +12,7 @@ I also got a hold of the EV_BMCeVWBSMEB ODX decription of the unit but could onl
 
  - Pin 11: +12V
  - Pin 15: CAN-L (of the CAN-EV bus)
- - Pin 16: CAN-L (of the CAN-EV bus)
+ - Pin 16: CAN-H (of the CAN-EV bus)
  - Pin 31: GND
 
 The CAN-EV bus is unfortunately named "powertrain CAN bus" in the ID.4 wiring diagram, even though it is a separate bus from the powertrain bus. To make matters even worse, the actual powertrain CAN bus is also named "powertrain CAN bus" (pin 13/14 on the gateway) in the wiring diagram.

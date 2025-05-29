@@ -10,8 +10,8 @@ Flash the custom firmware on the USB2CANFDv1, start by [completely emptying the 
 ## Step 3
 Cut the following strands of the aliexpress cable and plug them in accordingly on the USB2CANFDv1 screw terminal. There are pin# marking on the connector making them easy to identify.
 
- - Pin 15: CAN-L (of the CAN-EV bus)
- - Pin 16: CAN-L (of the CAN-EV bus)
+ - Pin 15: CAN-L
+ - Pin 16: CAN-H
  - Pin 31: GND
 
 The end product should look something like
