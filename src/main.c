@@ -213,9 +213,9 @@ int main(void)
     while (1)
     {
         gpio_pin_set_dt(&led, 0);
-        k_msleep(SLEEP_TIME_OFF_MS);
+        k_msleep(800);
         gpio_pin_set_dt(&led, 1);
-        k_msleep(SLEEP_TIME_ON_MS);
+        k_msleep(200);
     }
 
     return 0;
