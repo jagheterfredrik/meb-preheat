@@ -31,6 +31,21 @@ It also seems the only way to reach 175kW (470A @ 375V) is to charge when the `b
 Open questions:
  - Does the J840 have an external EEPROM to dump the firmware from
 
+### Remote heating
+This connection could also open up for an open source app for climate control and SoC reading (i.e. and alternative to the Volkswagen app and the $$$ subscription). The bus wakes with a message on 0x1B000010 (which is one of many that control CAN sleep modes). The climate control is set using 0x16A954FB, it has 30 modes (LO, 16.0, 16.5, ..., 29.0, 29.5, HI) which can be read from:
+
+```c
+uint8_t requested_cabin_temperature = ((buf[2] & 0xf) << 2) | ((buf[1] & 0xc0) >> 6)
+```
+
+The message also indicates if heating is active or not:
+```
+Heating on LO:  00 00 90 02 1A 00 00 00
+Heating off LO: 00 00 00 00 18 00 00 00
+Heating on HI:  00 40 97 02 1A 00 00 00
+Heating off HI: 00 40 07 00 18 00 00 00
+```
+
 ## The J533 (gateway) method
 The folks over at OBD11 has figured out a way to heat the battery using a UDS output test through the gateway to the battery module (J840, module 8C). This allows you to heat the battery for 5 minutes but requires your hood to be opened before being accepted. This is cool but not very practical for the purpose of preheating before DC fast charging while travelling. The output test can be re-run but the gateway firewall will lock you out after driving 200km.
 
