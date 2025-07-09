@@ -45,6 +45,7 @@ Heating off LO: 00 00 00 00 18 00 00 00
 Heating on HI:  00 40 97 02 1A 00 00 00
 Heating off HI: 00 40 07 00 18 00 00 00
 ```
+Heating active is also indicated in 0x16A95493, first byte is 0x01 when on and 0x00 when off
 
 ## The J533 (gateway) method
 The folks over at OBD11 has figured out a way to heat the battery using a UDS output test through the gateway to the battery module (J840, module 8C). This allows you to heat the battery for 5 minutes but requires your hood to be opened before being accepted. This is cool but not very practical for the purpose of preheating before DC fast charging while travelling. The output test can be re-run but the gateway firewall will lock you out after driving 200km.
